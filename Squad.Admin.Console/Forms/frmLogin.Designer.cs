@@ -1,4 +1,4 @@
-﻿namespace SquadRCON
+﻿namespace Squad.AdminConsole.Forms
 {
     partial class frmLogin
     {
