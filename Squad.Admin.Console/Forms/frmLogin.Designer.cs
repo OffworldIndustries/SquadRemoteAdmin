@@ -1,4 +1,4 @@
-﻿namespace Squad.AdminConsole.Forms
+﻿namespace Squad.Admin.Console.Forms
 {
     partial class frmLogin
     {
@@ -89,6 +89,7 @@
             // 
             // btnLogin
             // 
+            this.btnLogin.Enabled = false;
             this.btnLogin.Location = new System.Drawing.Point(220, 129);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(109, 36);
@@ -118,8 +119,12 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Squad RCON - Login";
             this.ResumeLayout(false);
             this.PerformLayout();

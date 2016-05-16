@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Squad.AdminConsole.Forms;
+using Squad.Admin.Console.Forms;
 
 namespace Squad.AdminConsole
 {

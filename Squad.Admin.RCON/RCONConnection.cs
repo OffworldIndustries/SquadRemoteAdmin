@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Squad.Admin.RCON
 {
-    public class Class1
+    public class RCONConnection
     {
     }
 }

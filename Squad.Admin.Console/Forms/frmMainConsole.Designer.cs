@@ -1,4 +1,4 @@
-﻿namespace Squad.AdminConsole.Forms
+﻿namespace Squad.Admin.Console.Forms
 {
     partial class grpPlayers
     {
@@ -31,20 +31,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(grpPlayers));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPlayerName = new System.Windows.Forms.TextBox();
+            this.lblFindPlayer = new System.Windows.Forms.Label();
             this.lvwPlayers = new System.Windows.Forms.ListView();
             this.colSlot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPlayer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSteamId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grpConsole = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtResponse = new System.Windows.Forms.TextBox();
             this.txtCommand = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblFindPlayer = new System.Windows.Forms.Label();
-            this.txtPlayerName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.grpConsole.SuspendLayout();
@@ -72,6 +72,22 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Player List";
+            // 
+            // txtPlayerName
+            // 
+            this.txtPlayerName.Location = new System.Drawing.Point(71, 516);
+            this.txtPlayerName.Name = "txtPlayerName";
+            this.txtPlayerName.Size = new System.Drawing.Size(251, 20);
+            this.txtPlayerName.TabIndex = 10;
+            // 
+            // lblFindPlayer
+            // 
+            this.lblFindPlayer.AutoSize = true;
+            this.lblFindPlayer.Location = new System.Drawing.Point(6, 519);
+            this.lblFindPlayer.Name = "lblFindPlayer";
+            this.lblFindPlayer.Size = new System.Drawing.Size(59, 13);
+            this.lblFindPlayer.TabIndex = 9;
+            this.lblFindPlayer.Text = "Find Player";
             // 
             // lvwPlayers
             // 
@@ -107,7 +123,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(109, 36);
             this.btnRefresh.TabIndex = 7;
-            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Text = "Refresh Players";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // grpConsole
@@ -124,13 +140,22 @@
             this.grpConsole.TabStop = false;
             this.grpConsole.Text = "Console Command";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Server Console Output:";
+            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(376, 46);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(109, 36);
             this.btnClear.TabIndex = 9;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Clear Command";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
             // btnSend
@@ -139,7 +164,7 @@
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(109, 36);
             this.btnSend.TabIndex = 8;
-            this.btnSend.Text = "Send";
+            this.btnSend.Text = "Send Command";
             this.btnSend.UseVisualStyleBackColor = true;
             // 
             // txtResponse
@@ -167,31 +192,6 @@
             this.btnExit.TabIndex = 9;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 85);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Server Console:";
-            // 
-            // lblFindPlayer
-            // 
-            this.lblFindPlayer.AutoSize = true;
-            this.lblFindPlayer.Location = new System.Drawing.Point(6, 519);
-            this.lblFindPlayer.Name = "lblFindPlayer";
-            this.lblFindPlayer.Size = new System.Drawing.Size(59, 13);
-            this.lblFindPlayer.TabIndex = 9;
-            this.lblFindPlayer.Text = "Find Player";
-            // 
-            // txtPlayerName
-            // 
-            this.txtPlayerName.Location = new System.Drawing.Point(71, 516);
-            this.txtPlayerName.Name = "txtPlayerName";
-            this.txtPlayerName.Size = new System.Drawing.Size(251, 20);
-            this.txtPlayerName.TabIndex = 10;
             // 
             // grpPlayers
             // 
