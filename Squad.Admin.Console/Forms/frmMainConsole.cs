@@ -105,15 +105,7 @@ namespace Squad.Admin.Console.Forms
 
             if (this.squadServer.GetControl(this.serverConnectionInfo.Password))
             {
-                btnDisconnect.Enabled = true;
-                btnConnect.Enabled = false;
-                txtServerIP.Enabled = false;
-                txtServerPort.Enabled = false;
-                txtRconPassword.Enabled = false;
-                txtDisplayName.Enabled = false;
-                chkShowPassword.Enabled = false;
-                grpPlayerList.Enabled = true;
-                grpConsole.Enabled = true;
+                EnableLoginControls(true);
                 txtResponse.Text = this.squadServer.Rcon.SendCommand("ListPlayers", true);
             }
 
@@ -126,6 +118,19 @@ namespace Squad.Admin.Console.Forms
         }
 
         #endregion
+
+        private void EnableLoginControls(bool enable)
+        {
+            btnDisconnect.Enabled = enable;
+            btnConnect.Enabled = !enable;
+            txtServerIP.Enabled = !enable;
+            txtServerPort.Enabled = !enable;
+            txtRconPassword.Enabled = !enable;
+            txtDisplayName.Enabled = !enable;
+            chkShowPassword.Enabled = !enable;
+            grpPlayerList.Enabled = enable;
+            grpConsole.Enabled = enable;
+        }
 
     }
 }
