@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squad.Admin.Console", "..\Squad.Admin.Console\Squad.Admin.Console.csproj", "{5692DF4A-0742-4117-A5CE-9DB42BB63527}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squad.Admin.RCON", "..\Squad.Admin.RCON\Squad.Admin.RCON.csproj", "{82E78215-A25F-455B-B39E-8ED105D1E6CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryMaster", "..\..\..\TG\QueryMasterRCON\QueryMaster\QueryMaster.csproj", "{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5692DF4A-0742-4117-A5CE-9DB42BB63527}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5692DF4A-0742-4117-A5CE-9DB42BB63527}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5692DF4A-0742-4117-A5CE-9DB42BB63527}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82E78215-A25F-455B-B39E-8ED105D1E6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82E78215-A25F-455B-B39E-8ED105D1E6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82E78215-A25F-455B-B39E-8ED105D1E6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82E78215-A25F-455B-B39E-8ED105D1E6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

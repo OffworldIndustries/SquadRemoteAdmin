@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Squad.Admin.Console.Forms
+namespace Squad.AdminConsole.Forms
 {
-    public partial class frmLogin : Form
+    public partial class frmServerMgmt : Form
     {
-        public frmLogin()
+        public frmServerMgmt()
         {
             InitializeComponent();
         }

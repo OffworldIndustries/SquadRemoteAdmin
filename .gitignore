@@ -301,3 +301,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Squad.Admin.RCON/Squad.Admin.RCON.csproj
+Squad.Admin.RCON/ConnectionInfo.cs
+Squad.Admin.RCON/Old/PacketOrigin.cs
+Squad.Admin.RCON/Old/PacketSerializer.cs
+Squad.Admin.RCON/Delegates.cs
+Squad.Admin.RCON/Old/PacketTypes.cs
+Squad.Admin.RCON/Old/Packet.cs
+Squad.Admin.RCON/Squad.Admin.RCON.csproj
+Squad.Admin.RCON/ServerSocket.cs
