@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net;
 
-namespace Squad.AdminConsole.Utilities
+namespace Squad.Admin.Console.Utilities
 {
-    public class ServerConnection
+    public class ServerConnectionInfo
     {
-        public ServerConnection() { this.Password = string.Empty; this.AdminName = "RCON Admin"; }
+        public ServerConnectionInfo() { this.Password = string.Empty; this.AdminName = "RCON Admin"; }
         public IPAddress ServerIP { get; set; }
         public int ServerPort { get; set; }
         public string Password { get; set; }

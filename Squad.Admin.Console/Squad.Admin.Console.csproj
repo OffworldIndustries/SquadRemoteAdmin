@@ -7,7 +7,7 @@
     <ProjectGuid>{5692DF4A-0742-4117-A5CE-9DB42BB63527}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Squad.AdminConsole</RootNamespace>
+    <RootNamespace>Squad.Admin.Console</RootNamespace>
     <AssemblyName>SquadRCON</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -105,7 +105,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ServerConnection.cs" />
+    <Compile Include="ServerProxy.cs" />
+    <Compile Include="Utilities\Enumerations.cs" />
+    <Compile Include="Utilities\ServerConnectionInfo.cs" />
     <EmbeddedResource Include="Forms\frmMainConsole.resx">
       <DependentUpon>frmMainConsole.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,7 +161,7 @@
     <Content Include="Squad.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TG\QueryMasterRCON\QueryMaster\QueryMaster.csproj">
+    <ProjectReference Include="..\QueryMaster\QueryMaster.csproj">
       <Project>{4ca9c894-518f-42d7-bbe2-cfdfe7a03f8a}</Project>
       <Name>QueryMaster</Name>
     </ProjectReference>
