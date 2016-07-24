@@ -69,6 +69,7 @@ namespace Squad.Admin.Console.Forms
             this.txtRconPassword.Validating += TxtRconPassword_Validating;
             this.grdPlayers.CellContentClick += GrdPlayers_CellContentClick;
             this.grdPlayers.MouseClick += GrdPlayers_MouseClick;
+            this.lstHistory.MouseDoubleClick += LstHistory_MouseDoubleClick;
 
             LoadAutocompleteCommands();
             
@@ -223,6 +224,19 @@ namespace Squad.Admin.Console.Forms
         {
             this.serverRconConnection.ServerCommand(((MenuItem)sender).Tag.ToString());
             AddCommandToHistoryList(((MenuItem)sender).Tag.ToString());
+        }
+
+
+        private void LstHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int index = this.lstHistory.IndexFromPoint(e.Location);
+                if (index != System.Windows.Forms.ListBox.NoMatches)
+                {
+                    SetTextboxText(txtCommand, lstHistory.Items[index].ToString());
+                }
+            }
         }
 
         #endregion
@@ -417,6 +431,19 @@ namespace Squad.Admin.Console.Forms
             else
             {
                 control.Text += response + Environment.NewLine;
+            }
+        }
+
+        private void SetTextboxText(TextBox control, string text)
+        {
+            if (control.InvokeRequired)
+            {
+                AddTextToTextbox c = new AddTextToTextbox(SetTextboxText);
+                this.Invoke(c, new object[] { control, text });
+            }
+            else
+            {
+                control.Text = text;
             }
         }
 

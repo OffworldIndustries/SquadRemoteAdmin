@@ -392,6 +392,7 @@
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.grpConsole);
             this.Controls.Add(this.grpPlayerList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMainConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
