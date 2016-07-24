@@ -32,6 +32,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grpPlayerList = new System.Windows.Forms.GroupBox();
             this.grdPlayers = new System.Windows.Forms.DataGridView();
+            this.cSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPlayer = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.cSteam64Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDisconnect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtPlayerName = new System.Windows.Forms.TextBox();
             this.lblFindPlayer = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -56,11 +61,6 @@
             this.txtRconPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.cSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPlayer = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.cSteam64Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDisconnect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpPlayerList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPlayers)).BeginInit();
@@ -110,6 +110,39 @@
             this.grdPlayers.ReadOnly = true;
             this.grdPlayers.Size = new System.Drawing.Size(624, 492);
             this.grdPlayers.TabIndex = 11;
+            // 
+            // cSlot
+            // 
+            this.cSlot.HeaderText = "Slot";
+            this.cSlot.Name = "cSlot";
+            this.cSlot.ReadOnly = true;
+            this.cSlot.Width = 40;
+            // 
+            // cPlayer
+            // 
+            this.cPlayer.HeaderText = "Player";
+            this.cPlayer.Name = "cPlayer";
+            this.cPlayer.ReadOnly = true;
+            this.cPlayer.Width = 160;
+            // 
+            // cSteam64Id
+            // 
+            this.cSteam64Id.HeaderText = "Steam64Id";
+            this.cSteam64Id.Name = "cSteam64Id";
+            this.cSteam64Id.ReadOnly = true;
+            this.cSteam64Id.Width = 165;
+            // 
+            // cStatus
+            // 
+            this.cStatus.HeaderText = "Status";
+            this.cStatus.Name = "cStatus";
+            this.cStatus.ReadOnly = true;
+            // 
+            // cDisconnect
+            // 
+            this.cDisconnect.HeaderText = "Disconnected";
+            this.cDisconnect.Name = "cDisconnect";
+            this.cDisconnect.ReadOnly = true;
             // 
             // txtPlayerName
             // 
@@ -170,7 +203,7 @@
             this.lstHistory.FormattingEnabled = true;
             this.lstHistory.Location = new System.Drawing.Point(6, 108);
             this.lstHistory.Name = "lstHistory";
-            this.lstHistory.Size = new System.Drawing.Size(469, 173);
+            this.lstHistory.Size = new System.Drawing.Size(469, 147);
             this.lstHistory.TabIndex = 5;
             // 
             // label1
@@ -184,16 +217,17 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(366, 46);
+            this.btnClear.Location = new System.Drawing.Point(366, 261);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(109, 36);
             this.btnClear.TabIndex = 3;
-            this.btnClear.Text = "Clear Command";
+            this.btnClear.Text = "Clear History";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(251, 46);
+            this.btnSend.Location = new System.Drawing.Point(366, 46);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(109, 36);
             this.btnSend.TabIndex = 2;
@@ -348,39 +382,6 @@
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Server IP:";
-            // 
-            // cSlot
-            // 
-            this.cSlot.HeaderText = "Slot";
-            this.cSlot.Name = "cSlot";
-            this.cSlot.ReadOnly = true;
-            this.cSlot.Width = 40;
-            // 
-            // cPlayer
-            // 
-            this.cPlayer.HeaderText = "Player";
-            this.cPlayer.Name = "cPlayer";
-            this.cPlayer.ReadOnly = true;
-            this.cPlayer.Width = 160;
-            // 
-            // cSteam64Id
-            // 
-            this.cSteam64Id.HeaderText = "Steam64Id";
-            this.cSteam64Id.Name = "cSteam64Id";
-            this.cSteam64Id.ReadOnly = true;
-            this.cSteam64Id.Width = 165;
-            // 
-            // cStatus
-            // 
-            this.cStatus.HeaderText = "Status";
-            this.cStatus.Name = "cStatus";
-            this.cStatus.ReadOnly = true;
-            // 
-            // cDisconnect
-            // 
-            this.cDisconnect.HeaderText = "Disconnected";
-            this.cDisconnect.Name = "cDisconnect";
-            this.cDisconnect.ReadOnly = true;
             // 
             // frmMainConsole
             // 
