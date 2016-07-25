@@ -171,8 +171,9 @@ namespace Squad.Admin.Console.Forms
 
                 // pull the current player name from the clicked row
                 string playerName = grdPlayers.Rows[currentMouseOverRow].Cells[1].Value.ToString();
-                string playerId = grdPlayers.Rows[currentMouseOverRow].Cells[2].Value.ToString();
+                string playerSteamId = grdPlayers.Rows[currentMouseOverRow].Cells[2].Value.ToString();
                 string adminName = txtDisplayName.Text.Trim().Length != 0 ? txtDisplayName.Text.Trim() : "RCON Admin";
+                string slot = grdPlayers.Rows[currentMouseOverRow].Cells[0].Value.ToString();
 
                 if (currentMouseOverRow >= 0)
                 {
@@ -196,7 +197,7 @@ namespace Squad.Admin.Console.Forms
                     foreach (XElement k in menuReasons.Root.Element("KickReasons").Elements())
                     {
                         MenuItem kick = new MenuItem(k.Value.Replace("PLAYERNAME", playerName).Replace("ADMINNAME", adminName));
-                        kick.Tag = "AdminKickById " + playerId + " " + kick.Text;
+                        kick.Tag = "AdminKick " + playerSteamId + " " + kick.Text;
                         kick.Click += menu_Click;
                         ki.MenuItems.Add(kick);
                     }
@@ -208,7 +209,7 @@ namespace Squad.Admin.Console.Forms
                     foreach (XElement b in menuReasons.Root.Element("BanReasons").Elements())
                     {
                         MenuItem ban = new MenuItem(b.Value.Replace("PLAYERNAME", playerName).Replace("ADMINNAME", adminName));
-                        ban.Tag = "AdminBanById " + playerId + " " + ban.Text;
+                        ban.Tag = "AdminBan " + playerSteamId + " " + ban.Text;
                         ban.Click += menu_Click;
                         bi.MenuItems.Add(ban);
                     }
@@ -350,7 +351,7 @@ namespace Squad.Admin.Console.Forms
                     if (currentLine.Length > 0)
                     {
                         // Looking for the list to change to disconnected players - skip this check once we're in the disconnected list
-                        if (!d) d = currentLine.Trim().ToUpper() == "----- Recently Disconnected Players [Max of 15] ----".ToUpper();
+                        if (currentLine.Trim().ToUpper() == "----- Recently Disconnected Players [Max of 15] ----".ToUpper()) d = true;
 
 
                         if (!d)
