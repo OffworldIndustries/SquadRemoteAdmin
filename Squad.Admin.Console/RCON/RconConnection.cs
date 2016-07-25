@@ -362,11 +362,11 @@ namespace Squad.Admin.Console.RCON
             BPtr += 4;
             // string1 till /0
             stringcache = new ArrayList();
-            File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String1 Output\r\n");
+            //File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String1 Output\r\n");
             while (bytes[BPtr] != 0)
             {
                 stringcache.Add(bytes[BPtr]);
-                File.AppendAllText(@"D:\Projects\OWI\Log.txt", System.Text.ASCIIEncoding.UTF8.GetString(bytes, BPtr, 1));
+                //File.AppendAllText(@"D:\Projects\OWI\Log.txt", System.Text.ASCIIEncoding.UTF8.GetString(bytes, BPtr, 1));
                 BPtr++;
             }
             String1 = utf.GetString((byte[])stringcache.ToArray(typeof(byte)));
@@ -375,7 +375,7 @@ namespace Squad.Admin.Console.RCON
             // string2 till /0
 
             stringcache = new ArrayList();
-            File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String2 Output\r\n");
+            //File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String2 Output\r\n");
             while (bytes[BPtr] != 0)
             {
                 stringcache.Add(bytes[BPtr]);
