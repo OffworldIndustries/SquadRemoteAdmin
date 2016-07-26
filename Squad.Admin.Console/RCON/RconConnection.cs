@@ -13,8 +13,24 @@ namespace Squad.Admin.Console.RCON
     /// </summary>
     public class RconConnection
     {
+        public event CommandOutput ServerResponseReceived;
+        public event ErrorOutput ServerError;
+        public event BoolInfo ConnectionSuccess;
+
+        public static string ConnectionClosed = "Connection closed by remote host";
+        public static string ConnectionSuccessString = "Connection Succeeded!";
+        public static string ConnectionFailedString = "Connection Failed!";
+        public static string UnknownResponseType = "Unknown response";
+        public static string GotJunkPacket = "Had junk packet. This is normal.";
+
+        internal Socket S;
+        bool connected;
+
 
         private string commandName = string.Empty;
+        private readonly object LockObj = new object();
+
+        private byte[] EmptyPkt = new byte[] { 0x0a, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
         public RconConnection()
         {
@@ -96,7 +112,7 @@ namespace Squad.Admin.Console.RCON
             S.BeginSend(Packet, 0, Packet.Length, SocketFlags.None, new AsyncCallback(SendCallback), this);
         }
 
-        bool connected;
+
         public bool Connected
         {
             get { return connected; }
@@ -254,17 +270,6 @@ namespace Squad.Admin.Console.RCON
             }
         }
 
-        public event CommandOutput ServerResponseReceived;
-        public event ErrorOutput ServerError;
-        public event BoolInfo ConnectionSuccess;
-
-        public static string ConnectionClosed = "Connection closed by remote host";
-        public static string ConnectionSuccessString = "Connection Succeeded!";
-        public static string ConnectionFailedString = "Connection Failed!";
-        public static string UnknownResponseType = "Unknown response";
-        public static string GotJunkPacket = "Had junk packet. This is normal.";
-
-        Socket S;
     }
 
     public delegate void CommandOutput(string commandName, string commandResponse);
@@ -362,11 +367,10 @@ namespace Squad.Admin.Console.RCON
             BPtr += 4;
             // string1 till /0
             stringcache = new ArrayList();
-            //File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String1 Output\r\n");
+
             while (bytes[BPtr] != 0)
             {
                 stringcache.Add(bytes[BPtr]);
-                //File.AppendAllText(@"D:\Projects\OWI\Log.txt", System.Text.ASCIIEncoding.UTF8.GetString(bytes, BPtr, 1));
                 BPtr++;
             }
             String1 = utf.GetString((byte[])stringcache.ToArray(typeof(byte)));
@@ -375,7 +379,6 @@ namespace Squad.Admin.Console.RCON
             // string2 till /0
 
             stringcache = new ArrayList();
-            //File.AppendAllText(@"D:\Projects\OWI\Log.txt", "String2 Output\r\n");
             while (bytes[BPtr] != 0)
             {
                 stringcache.Add(bytes[BPtr]);
