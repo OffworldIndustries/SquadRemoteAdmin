@@ -38,7 +38,7 @@ namespace Squad.Admin.Console.RCON
             PacketCount = 0;
 
 #if DEBUG
-            TempPackets = new ArrayList();
+			TempPackets = new ArrayList();
 #endif
         }
 
@@ -352,6 +352,8 @@ namespace Squad.Admin.Console.RCON
 
         internal void ParseFromBytes(byte[] bytes, RconConnection parent)
         {
+
+            File.WriteAllBytes(@"D:\Projects\OWI\listplayers_70players", bytes);
 
             if (bytes.Length == 0) return;
 

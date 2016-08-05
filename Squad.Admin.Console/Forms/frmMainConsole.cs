@@ -146,7 +146,9 @@ namespace Squad.Admin.Console.Forms
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-
+            frmSettings fSettings = new frmSettings();
+            fSettings.ShowDialog(this);
+            LoadContextMenuItems();
         }
 
         // Launch the browser with the Steam profile of the selected player
