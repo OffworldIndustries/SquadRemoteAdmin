@@ -235,7 +235,8 @@ namespace Squad.Admin.Console.RCON
                     else
                     {
                         hadjunkpacket = true;
-                        OnError(GotJunkPacket);
+                        //OnError(GotJunkPacket);
+                        OnError(string.Empty);
                     }
                     break;
                 default:
@@ -393,7 +394,7 @@ namespace Squad.Admin.Console.RCON
 
             if (BPtr != bytes.Length)
             {
-                parent.OnError("Urk, extra data!");
+                parent.OnError(String.Format("Unexpected value in return packet encountered! Value '{0}' encountered. Processing of response has been terminated.", bytes[BPtr].ToString()));
             }
         }
 

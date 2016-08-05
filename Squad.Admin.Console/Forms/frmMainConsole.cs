@@ -144,6 +144,12 @@ namespace Squad.Admin.Console.Forms
             SetControlEnabledState(btnClear, false);
         }
 
+        private void btnClearConsole_Click(object sender, EventArgs e)
+        {
+            // Clear the text from the server console response
+            SetTextboxText(txtResponse, string.Empty);
+        }
+
         private void btnSettings_Click(object sender, EventArgs e)
         {
             frmSettings fSettings = new frmSettings();
@@ -154,9 +160,13 @@ namespace Squad.Admin.Console.Forms
         // Launch the browser with the Steam profile of the selected player
         private void GrdPlayers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string sUrl = "http://steamcommunity.com/profiles/" + grdPlayers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            ProcessStartInfo sInfo = new ProcessStartInfo(sUrl);
-            Process.Start(sInfo);
+            // Only act if the cell content clicked was the player name and an actual row, not a column header
+            if (e.ColumnIndex == 1 && e.RowIndex > -1)
+            {
+                string sUrl = "http://steamcommunity.com/profiles/" + grdPlayers.Rows[e.RowIndex].Cells[2].Value.ToString();
+                ProcessStartInfo sInfo = new ProcessStartInfo(sUrl);
+                Process.Start(sInfo);
+            }
         }
 
         /// <summary>
@@ -241,6 +251,7 @@ namespace Squad.Admin.Console.Forms
                 }
             }
         }
+
 
         #endregion
 
@@ -420,7 +431,14 @@ namespace Squad.Admin.Console.Forms
             }
             else
             {
-                lstHistory.Items.Insert(0, commandText);
+                // prevent duplication of the same command from being added to the list
+                bool isDup = false;
+                for (int i = 0; i < lstHistory.Items.Count; i++)
+                {
+                    isDup = lstHistory.Items[i].ToString() == commandText;
+                    if (isDup) break;
+                }
+                if (!isDup) lstHistory.Items.Insert(0, commandText);
             }
         }
 
@@ -433,7 +451,8 @@ namespace Squad.Admin.Console.Forms
             }
             else
             {
-                control.Text += response + Environment.NewLine;
+                if (control.Text.Length > 0) control.Text += Environment.NewLine + Environment.NewLine;
+                control.Text += response;
             }
         }
 
@@ -503,6 +522,7 @@ namespace Squad.Admin.Console.Forms
             }
         }
         #endregion
+
 
     }
 }
