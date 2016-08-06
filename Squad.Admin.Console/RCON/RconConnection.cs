@@ -354,7 +354,7 @@ namespace Squad.Admin.Console.RCON
         internal void ParseFromBytes(byte[] bytes, RconConnection parent)
         {
 
-            File.WriteAllBytes(@"D:\Projects\OWI\listplayers_70players", bytes);
+            //File.WriteAllBytes(@"D:\Projects\OWI\listplayers_70players", bytes);
 
             if (bytes.Length == 0) return;
 
