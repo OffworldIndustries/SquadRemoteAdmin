@@ -95,7 +95,15 @@ namespace QueryMaster.GameServer
                     }
                     else
                     {
-                        str.Append(RconUtil.ProcessPacket(recvData[i]).Body + Util.BytesToString(recvData[++i].Take(recvData[i].Length - 2).ToArray()));
+                        if (recvData.Count > 1)
+                        {
+                            str.Append(RconUtil.ProcessPacket(recvData[i]).Body + Util.BytesToString(recvData[++i].Take(recvData[i].Length - 2).ToArray()));
+                        }
+                        else
+                        {
+                            str.Append(RconUtil.ProcessPacket(recvData[i]).Body);
+                        }
+                        
                     }
                 }
             }

@@ -354,13 +354,12 @@ namespace Squad.Admin.Console.RCON
         internal void ParseFromBytes(byte[] bytes, RconConnection parent)
         {
 
-            //File.WriteAllBytes(@"D:\Projects\OWI\listplayers_70players", bytes);
-
             if (bytes.Length == 0) return;
 
             int BPtr = 0;
             ArrayList stringcache;
             UTF8Encoding utf = new UTF8Encoding();
+
 
             // First 4 bytes are ReqId.
             RequestId = BitConverter.ToInt32(bytes, BPtr);
@@ -370,6 +369,7 @@ namespace Squad.Admin.Console.RCON
             BPtr += 4;
             // string1 till /0
             stringcache = new ArrayList();
+
 
             while (bytes[BPtr] != 0)
             {
@@ -394,8 +394,10 @@ namespace Squad.Admin.Console.RCON
 
             if (BPtr != bytes.Length)
             {
-                parent.OnError(String.Format("Unexpected value in return packet encountered! Value '{0}' encountered. Processing of response has been terminated.", bytes[BPtr].ToString()));
+                parent.OnError("Urk, extra data!");
             }
+
+
         }
 
         public enum SERVERDATA_sent : int

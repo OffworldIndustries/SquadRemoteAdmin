@@ -77,7 +77,24 @@ namespace QueryMaster
 
         internal static string BytesToString(byte[] bytes, int index , int count )
         {
-            return Encoding.UTF8.GetString(bytes, index, count);
+            // Determine if the byte array represents a UTF8 encoded response or a Unicode response
+
+            // None of the first 10 elements in the array of bytes should be a 0, especially the odd elements
+            // Use lamda expression and the modulus function to return only odd elements from the array of the return
+            byte[] oddElements = bytes.Where((value, i) => i % 2 == 1 && i < 10).ToArray();
+            // Now convert to int
+            int[] bytesAsInts = oddElements.Select(x => (int)x).ToArray();
+            int val = bytesAsInts.Sum();
+
+            // A value of 0 will be unicode, otherwise it is UTF8
+            if (val == 0)
+            {
+                return Encoding.Unicode.GetString(bytes, index, count);
+            }
+            else
+            {
+                return Encoding.UTF8.GetString(bytes, index, count);
+            }
         }
 
         internal static byte[] StringToBytes(string str)
