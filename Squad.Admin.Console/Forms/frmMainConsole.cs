@@ -52,16 +52,12 @@ namespace Squad.Admin.Console.Forms
     {
 
         ServerConnectionInfo serverConnectionInfo = new ServerConnectionInfo();
-        RconConnection serverRconConnection = new RconConnection();
+        ServerProxy rconServerProxy;
         XDocument menuReasons;
 
         public frmMainConsole()
         {
             InitializeComponent();
-
-            this.serverRconConnection.ConnectionSuccess += ServerRconConnection_ConnectionSuccess;
-            this.serverRconConnection.ServerResponseReceived += ServerRconConnection_ServerResponseReceived;
-            this.serverRconConnection.ServerError += ServerRconConnection_ServerError;
 
             // Bind control event handlers
             this.txtServerIP.Validating += TxtServerIP_Validating;
@@ -71,6 +67,7 @@ namespace Squad.Admin.Console.Forms
             this.grdPlayers.MouseClick += GrdPlayers_MouseClick;
             this.lstHistory.MouseDoubleClick += LstHistory_MouseDoubleClick;
 
+            rconServerProxy = new ServerProxy();
             LoadAutocompleteCommands();
             
         }
@@ -108,8 +105,20 @@ namespace Squad.Admin.Console.Forms
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            this.serverRconConnection.Connect(new IPEndPoint(this.serverConnectionInfo.ServerIP, this.serverConnectionInfo.ServerPort), this.serverConnectionInfo.Password);
-            LoadContextMenuItems();
+            try
+            {
+                // Connect to the game server
+                if (this.rconServerProxy.Connect(this.serverConnectionInfo))
+                {
+                    EnableLoginControls(true);
+                    ListPlayers();
+                }
+                LoadContextMenuItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unexpected error occurred trying to connect! Exception: " + ex.Message + "\r\nPlease report this error to the adminstrator.");
+            }
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
@@ -126,13 +135,14 @@ namespace Squad.Admin.Console.Forms
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            this.serverRconConnection.ServerCommand("ListPlayers");
+            ListPlayers();
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            this.serverRconConnection.ServerCommand(txtCommand.Text);
+            string response = this.rconServerProxy.SendCommand(txtCommand.Text);
             AddCommandToHistoryList(txtCommand.Text);
+            AddServerResponseText(txtResponse, response);
             ClearCommandText(txtCommand, string.Empty);
             SetControlEnabledState(btnClear, true);
         }
@@ -235,7 +245,7 @@ namespace Squad.Admin.Console.Forms
 
         void menu_Click(object sender, EventArgs e)
         {
-            this.serverRconConnection.ServerCommand(((MenuItem)sender).Tag.ToString());
+            this.rconServerProxy.SendCommand(((MenuItem)sender).Tag.ToString());
             AddCommandToHistoryList(((MenuItem)sender).Tag.ToString());
         }
 
@@ -309,48 +319,20 @@ namespace Squad.Admin.Console.Forms
 
         #region Command and response handlers
 
-        private void ServerRconConnection_ServerError(string error)
+        public void ListPlayers()
         {
-            AddServerResponseText(txtResponse, error);
-        }
 
-        /// <summary>
-        /// Event raised when a response to a server command is received
-        /// </summary>
-        /// <param name="commandName"></param>
-        /// <param name="commandResponse"></param>
-        private void ServerRconConnection_ServerResponseReceived(string commandName, string commandResponse)
-        {
-            switch(commandName.ToUpper())
-            {
-                case "LISTPLAYERS":
-                    this.ListPlayers(commandResponse);
-                    break;
-                default:
-                    AddServerResponseText(txtResponse, commandResponse);
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Server connnection success received
-        /// </summary>
-        /// <param name="info"></param>
-        private void ServerRconConnection_ConnectionSuccess(bool info)
-        {
-            EnableLoginControls(true);
-            this.serverRconConnection.ServerCommand("ListPlayers");
-        }
-
-        public void ListPlayers(string playerList)
-        {
-            // Remove all rows from the grid
-            ClearGridRows(grdPlayers);
+            string currentLine = string.Empty;
+            bool activePlayers = false;
+            bool disconnectedPlayers = false;
+            bool isPlayer = false;
 
             try
             {
-                bool d = false;     // flag used to indicate that we are not processing the recently disconnected players
-                string currentLine = string.Empty;
+                string playerList = this.rconServerProxy.SendCommand("ListPlayers");
+
+                // Remove all rows from the grid
+                ClearGridRows(grdPlayers);
 
                 // Take the response and break it into a string array breaking each line off
                 string[] playerArray = playerList.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
@@ -363,14 +345,33 @@ namespace Squad.Admin.Console.Forms
                     // No blank lines
                     if (currentLine.Length > 0)
                     {
+<<<<<<< HEAD
                         // Looking for the list to change to disconnected players - skip this check once we're in the disconnected list
                         if (currentLine.Trim().ToUpper() == "----- Recently Disconnected Players [Max of 15] ----".ToUpper()) d = true;
 
-
-                        if (!d)
+=======
+                        switch (currentLine.Trim())
                         {
-                            // Process connected player list - skip the first line
-                            if (currentLine.Trim().ToUpper() != ("----- Active Players -----").ToUpper())
+                            case "----- Active Players -----":
+                                activePlayers = true;
+                                disconnectedPlayers = false;
+                                isPlayer = false;
+                                break;
+                            case "----- Recently Disconnected Players [Max of 15] ----":
+                                activePlayers = false;
+                                disconnectedPlayers = true;
+                                isPlayer = false;
+                                break;
+                            default:
+                                isPlayer = true;
+                                break;
+                        }
+>>>>>>> refs/remotes/origin/master
+
+                        // Process connected player list
+                        if (activePlayers)
+                        {
+                            if (isPlayer)
                             {
                                 string[] playerInfo = currentLine.Split(':');
 
@@ -381,10 +382,11 @@ namespace Squad.Admin.Console.Forms
                                 AddPlayerToGrid(slot[0], playerName, steamId[0], "Connected", "");
                             }
                         }
-                        else
+
+                        // Process disconnected player list
+                        if (disconnectedPlayers)
                         {
-                            // Process disconnected player list
-                            if (currentLine.Trim().ToUpper() != "----- Recently Disconnected Players [Max of 15] ----".ToUpper())
+                            if (isPlayer)
                             {
                                 string[] playerInfo = currentLine.Split(':');
 
