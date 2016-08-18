@@ -345,11 +345,6 @@ namespace Squad.Admin.Console.Forms
                     // No blank lines
                     if (currentLine.Length > 0)
                     {
-<<<<<<< HEAD
-                        // Looking for the list to change to disconnected players - skip this check once we're in the disconnected list
-                        if (currentLine.Trim().ToUpper() == "----- Recently Disconnected Players [Max of 15] ----".ToUpper()) d = true;
-
-=======
                         switch (currentLine.Trim())
                         {
                             case "----- Active Players -----":
@@ -366,7 +361,7 @@ namespace Squad.Admin.Console.Forms
                                 isPlayer = true;
                                 break;
                         }
->>>>>>> refs/remotes/origin/master
+
 
                         // Process connected player list
                         if (activePlayers)
