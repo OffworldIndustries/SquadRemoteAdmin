@@ -329,7 +329,7 @@ namespace Squad.Admin.Console.Forms
 
             try
             {
-                string playerList = this.rconServerProxy.SendCommand("ListPlayers");
+                string playerList = this.rconServerProxy.GetPlayerList();
 
                 // Remove all rows from the grid
                 ClearGridRows(grdPlayers);
