@@ -65,6 +65,7 @@ namespace Squad.Admin.Console.Forms
             this.txtRconPassword.Validating += TxtRconPassword_Validating;
             this.grdPlayers.CellContentClick += GrdPlayers_CellContentClick;
             this.grdPlayers.MouseClick += GrdPlayers_MouseClick;
+            this.grdPlayers.RowPrePaint += GrdPlayers_RowPrePaint;
             this.lstHistory.MouseDoubleClick += LstHistory_MouseDoubleClick;
 
             rconServerProxy = new ServerProxy();
@@ -242,6 +243,13 @@ namespace Squad.Admin.Console.Forms
             }
         }
 
+        private void GrdPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (Convert.ToString(grdPlayers.Rows[e.RowIndex].Cells[5].Value).Trim() != string.Empty)
+            {
+                grdPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Silver;
+            }
+        }
 
         void menu_Click(object sender, EventArgs e)
         {

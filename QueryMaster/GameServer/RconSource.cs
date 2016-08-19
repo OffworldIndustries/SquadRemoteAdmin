@@ -31,6 +31,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using QueryMaster;
+using System.IO;
 namespace QueryMaster.GameServer
 {
     class RconSource : Rcon
