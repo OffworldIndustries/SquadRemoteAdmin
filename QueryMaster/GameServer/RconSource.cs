@@ -85,6 +85,7 @@ namespace QueryMaster.GameServer
             StringBuilder str = new StringBuilder();
             try
             {
+                
                 for (int i = 0; i < recvData.Count; i++)
                 {
                     //consecutive rcon command replies start with an empty packet 
