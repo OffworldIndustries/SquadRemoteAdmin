@@ -245,7 +245,7 @@ namespace Squad.Admin.Console.Forms
 
         private void GrdPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (Convert.ToString(grdPlayers.Rows[e.RowIndex].Cells[5].Value).Trim() != string.Empty)
+            if (Convert.ToString(grdPlayers.Rows[e.RowIndex].Cells[4].Value).Trim() != string.Empty)
             {
                 grdPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Silver;
             }
@@ -360,7 +360,7 @@ namespace Squad.Admin.Console.Forms
                                 disconnectedPlayers = false;
                                 isPlayer = false;
                                 break;
-                            case "----- Recently Disconnected Players [Max of 15] ----":
+                            case "----- Recently Disconnected Players [Max of 15] -----":
                                 activePlayers = false;
                                 disconnectedPlayers = true;
                                 isPlayer = false;
@@ -407,6 +407,7 @@ namespace Squad.Admin.Console.Forms
             }
             catch(Exception ex)
             { }
+
 
         }
 
