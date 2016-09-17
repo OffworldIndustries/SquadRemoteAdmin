@@ -38,6 +38,8 @@ using System.Diagnostics;
 using Squad.Admin.Console.Utilities;
 using Squad.Admin.Console.RCON;
 
+using QueryMaster;
+using QueryMaster.GameServer;
 
 namespace Squad.Admin.Console.Forms
 {

@@ -54,6 +54,9 @@ namespace QueryMaster.GameServer
 
         internal List<byte[]> GetMultiPacketResponse(byte[] msg)
         {
+            Guid packet = Guid.NewGuid();
+            int packetnbr = 1;
+
             List<byte[]> recvBytes = new List<byte[]>();
             bool isRemaining = true;
             byte[] recvData;
@@ -61,6 +64,11 @@ namespace QueryMaster.GameServer
             SendData(EmptyPkt);//Empty packet
             recvData = ReceiveData();//reply
             recvBytes.Add(recvData);
+
+            // Log returned bytes
+            //System.IO.File.WriteAllBytes(packet + "_" + packetnbr.ToString(), recvData);
+
+            packetnbr++;
 
             do
             {
@@ -70,9 +78,18 @@ namespace QueryMaster.GameServer
                 if (recvData.Length > 0)
                 {
                     if (BitConverter.ToInt32(recvData, 4) == (int)PacketId.Empty)
+                    {
                         isRemaining = false;
+                    }
                     else
+                    {
+                        // Log returned bytes
+                        //System.IO.File.WriteAllBytes(packet + "_" + packetnbr.ToString(), recvData);
+                        packetnbr++;
+
                         recvBytes.Add(recvData);
+                    }
+                        
                 }
                 else
                     isRemaining = false;

@@ -63,7 +63,55 @@ namespace QueryMaster.GameServer
                 if (body.Length == 2)
                     packet.Body = string.Empty;
                 else
+                {
                     packet.Body = Util.BytesToString(body, 0, body.Length - 3);
+                }
+                Console.WriteLine(packet.Body);
+                Console.WriteLine();
+            }
+            catch (Exception e)
+            {
+                e.Data.Add("ReceivedData", data == null ? new byte[1] : data);
+                throw;
+            }
+            return packet;
+        }
+
+        internal static RconSrcPacket ProcessPacket(byte[] data, bool firstPacket, bool lastPacket)
+        {
+            RconSrcPacket packet = new RconSrcPacket();
+            try
+            {
+                byte[] body = new byte[] { };
+
+                // Current RCON implementation is not to the specifications
+                // Only the first packet has the header information - following packets
+                // are just a continuation of the response without any header
+                if (firstPacket)
+                {
+                    Parser parser = new Parser(data);
+                    packet.Size = parser.ReadInt();
+                    packet.Id = parser.ReadInt();
+                    packet.Type = parser.ReadInt();
+                    body = parser.GetUnParsedBytes();
+                }
+                else
+                {
+                    // any packet after the first is just continuation of the response
+                    body = data;
+                }
+
+                if (body.Length == 2)
+                    packet.Body = string.Empty;
+                else
+                {
+                    if (lastPacket)
+                        packet.Body = Util.BytesToString(body, 0, body.Length - 3);
+                    else
+                        packet.Body = Util.BytesToString(body, 0, body.Length);
+                }
+                Console.WriteLine(packet.Body);
+                Console.WriteLine();
             }
             catch (Exception e)
             {

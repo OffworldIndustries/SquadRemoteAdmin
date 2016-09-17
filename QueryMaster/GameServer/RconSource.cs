@@ -83,12 +83,12 @@ namespace QueryMaster.GameServer
             RconSrcPacket senPacket = new RconSrcPacket() { Body = command, Id = (int)PacketId.ExecCmd, Type = (int)PacketType.Exec };
             List<byte[]> recvData = socket.GetMultiPacketResponse(RconUtil.GetBytes(senPacket));
             StringBuilder str = new StringBuilder();
+            bool lastPacket = false;
+            bool firstPacket = false;
             try
             {
-                
                 for (int i = 0; i < recvData.Count; i++)
                 {
-                    //consecutive rcon command replies start with an empty packet 
                     if (BitConverter.ToInt32(recvData[i], 4) == (int)PacketId.Empty)
                         continue;
                     if (recvData[i].Length - BitConverter.ToInt32(recvData[i], 0) == 4)
@@ -97,17 +97,12 @@ namespace QueryMaster.GameServer
                     }
                     else
                     {
-                        if (recvData.Count > 1)
-                        {
-                            str.Append(RconUtil.ProcessPacket(recvData[i]).Body + Util.BytesToString(recvData[++i].Take(recvData[i].Length - 2).ToArray()));
-                        }
-                        else
-                        {
-                            str.Append(RconUtil.ProcessPacket(recvData[i]).Body);
-                        }
-                        
+                        lastPacket = (i == recvData.Count - 1);
+                        firstPacket = i == 0;
+                        str.Append(RconUtil.ProcessPacket(recvData[i], firstPacket, lastPacket).Body);
                     }
                 }
+
             }
             catch (Exception e)
             {

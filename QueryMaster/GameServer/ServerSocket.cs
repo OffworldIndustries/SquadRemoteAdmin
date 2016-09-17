@@ -42,6 +42,8 @@ namespace QueryMaster.GameServer
         protected internal int BufferSize = 0;
         internal EngineType EngineType { get; set; }
         internal Socket Socket { set; get; }
+        private readonly object SendLockObj = new object();
+        private readonly object RecvLockObj = new object();
         private readonly object LockObj = new object();
         internal ServerSocket(ConnectionInfo conInfo,ProtocolType  type)
         {
@@ -71,7 +73,8 @@ namespace QueryMaster.GameServer
         internal int SendData(byte[] data)
         {
             ThrowIfDisposed();
-            lock(LockObj)
+            lock(SendLockObj)
+            //lock(LockObj)
                 return Socket.Send(data);
         }
 
@@ -80,7 +83,8 @@ namespace QueryMaster.GameServer
             ThrowIfDisposed();
             byte[] recvData = new byte[BufferSize];
             int recv = 0;
-            lock(LockObj)
+            lock(RecvLockObj)
+            //lock(LockObj)
                 recv = Socket.Receive(recvData);
             return recvData.Take(recv).ToArray();
         }
@@ -91,10 +95,14 @@ namespace QueryMaster.GameServer
             {
                 if (disposing)
                 {
-                    lock (LockObj)
+                    //lock (LockObj)
+                    lock(RecvLockObj)
                     {
-                        if (Socket != null)
-                            Socket.Close();
+                        lock(SendLockObj)
+                        {
+                            if (Socket != null)
+                                Socket.Close();
+                        }
                     }
                 }
                 base.Dispose(disposing);

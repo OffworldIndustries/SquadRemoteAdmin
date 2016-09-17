@@ -32,10 +32,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grpPlayerList = new System.Windows.Forms.GroupBox();
             this.grdPlayers = new System.Windows.Forms.DataGridView();
+            this.cSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPlayer = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.cSteam64Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDisconnect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtPlayerName = new System.Windows.Forms.TextBox();
             this.lblFindPlayer = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grpConsole = new System.Windows.Forms.GroupBox();
+            this.btnClearConsole = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,12 +62,6 @@
             this.txtRconPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.cSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPlayer = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.cSteam64Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDisconnect = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnClearConsole = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpPlayerList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPlayers)).BeginInit();
@@ -114,6 +114,40 @@
             this.grdPlayers.Size = new System.Drawing.Size(624, 579);
             this.grdPlayers.TabIndex = 11;
             // 
+            // cSlot
+            // 
+            this.cSlot.HeaderText = "Slot";
+            this.cSlot.Name = "cSlot";
+            this.cSlot.ReadOnly = true;
+            this.cSlot.Width = 40;
+            // 
+            // cPlayer
+            // 
+            this.cPlayer.HeaderText = "Player";
+            this.cPlayer.Name = "cPlayer";
+            this.cPlayer.ReadOnly = true;
+            this.cPlayer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cPlayer.Width = 160;
+            // 
+            // cSteam64Id
+            // 
+            this.cSteam64Id.HeaderText = "Steam64Id";
+            this.cSteam64Id.Name = "cSteam64Id";
+            this.cSteam64Id.ReadOnly = true;
+            this.cSteam64Id.Width = 165;
+            // 
+            // cStatus
+            // 
+            this.cStatus.HeaderText = "Status";
+            this.cStatus.Name = "cStatus";
+            this.cStatus.ReadOnly = true;
+            // 
+            // cDisconnect
+            // 
+            this.cDisconnect.HeaderText = "Disconnected";
+            this.cDisconnect.Name = "cDisconnect";
+            this.cDisconnect.ReadOnly = true;
+            // 
             // txtPlayerName
             // 
             this.txtPlayerName.Location = new System.Drawing.Point(71, 20);
@@ -163,6 +197,17 @@
             this.grpConsole.TabIndex = 0;
             this.grpConsole.TabStop = false;
             this.grpConsole.Text = "Console Command";
+            // 
+            // btnClearConsole
+            // 
+            this.btnClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearConsole.Location = new System.Drawing.Point(366, 631);
+            this.btnClearConsole.Name = "btnClearConsole";
+            this.btnClearConsole.Size = new System.Drawing.Size(109, 36);
+            this.btnClearConsole.TabIndex = 8;
+            this.btnClearConsole.Text = "Clear Console";
+            this.btnClearConsole.UseVisualStyleBackColor = true;
+            this.btnClearConsole.Click += new System.EventHandler(this.btnClearConsole_Click);
             // 
             // label2
             // 
@@ -369,51 +414,6 @@
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Server IP:";
-            // 
-            // cSlot
-            // 
-            this.cSlot.HeaderText = "Slot";
-            this.cSlot.Name = "cSlot";
-            this.cSlot.ReadOnly = true;
-            this.cSlot.Width = 40;
-            // 
-            // cPlayer
-            // 
-            this.cPlayer.HeaderText = "Player";
-            this.cPlayer.Name = "cPlayer";
-            this.cPlayer.ReadOnly = true;
-            this.cPlayer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.cPlayer.Width = 160;
-            // 
-            // cSteam64Id
-            // 
-            this.cSteam64Id.HeaderText = "Steam64Id";
-            this.cSteam64Id.Name = "cSteam64Id";
-            this.cSteam64Id.ReadOnly = true;
-            this.cSteam64Id.Width = 165;
-            // 
-            // cStatus
-            // 
-            this.cStatus.HeaderText = "Status";
-            this.cStatus.Name = "cStatus";
-            this.cStatus.ReadOnly = true;
-            // 
-            // cDisconnect
-            // 
-            this.cDisconnect.HeaderText = "Disconnected";
-            this.cDisconnect.Name = "cDisconnect";
-            this.cDisconnect.ReadOnly = true;
-            // 
-            // btnClearConsole
-            // 
-            this.btnClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearConsole.Location = new System.Drawing.Point(366, 631);
-            this.btnClearConsole.Name = "btnClearConsole";
-            this.btnClearConsole.Size = new System.Drawing.Size(109, 36);
-            this.btnClearConsole.TabIndex = 8;
-            this.btnClearConsole.Text = "Clear Console";
-            this.btnClearConsole.UseVisualStyleBackColor = true;
-            this.btnClearConsole.Click += new System.EventHandler(this.btnClearConsole_Click);
             // 
             // frmMainConsole
             // 
