@@ -114,6 +114,7 @@ namespace Squad.Admin.Console.Forms
                 if (this.rconServerProxy.Connect(this.serverConnectionInfo))
                 {
                     EnableLoginControls(true);
+                    GetServerInformation();
                     ListPlayers();
                 }
                 LoadContextMenuItems();
@@ -138,6 +139,7 @@ namespace Squad.Admin.Console.Forms
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            GetServerInformation();
             ListPlayers();
         }
 
@@ -328,6 +330,23 @@ namespace Squad.Admin.Console.Forms
         #endregion
 
         #region Command and response handlers
+
+        /// <summary>
+        /// Retrieve server information and display it
+        /// </summary>
+        private void GetServerInformation()
+        {
+            ServerInfo info = this.rconServerProxy.GetServerData();
+
+            if (info != null)
+            {
+                lblConnectedTo.Text = info.Name;
+                lblMapName.Text = info.Map;
+                lblPlayerCount.Text = info.Players + "/" + info.MaxPlayers;
+            }
+
+        }
+
 
         public void ListPlayers()
         {

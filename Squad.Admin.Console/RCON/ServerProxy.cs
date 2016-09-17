@@ -60,6 +60,15 @@ namespace Squad.Admin.Console.RCON
             }
         }
 
+        public ServerInfo GetServerData()
+        {
+            // connect over UDP port
+            using (Server s = ServerQuery.GetServerInstance(EngineType.Source, new IPEndPoint(this.serverConnectionInfo.ServerIP, 27165)))
+            {
+                return s.GetInfo();
+            }
+        }
+
         #endregion
 
     }
