@@ -38,6 +38,8 @@ using System.Diagnostics;
 using Squad.Admin.Console.Utilities;
 using Squad.Admin.Console.RCON;
 
+using QueryMaster;
+using QueryMaster.GameServer;
 
 namespace Squad.Admin.Console.Forms
 {
@@ -65,6 +67,8 @@ namespace Squad.Admin.Console.Forms
             this.txtRconPassword.Validating += TxtRconPassword_Validating;
             this.grdPlayers.CellContentClick += GrdPlayers_CellContentClick;
             this.grdPlayers.MouseClick += GrdPlayers_MouseClick;
+            this.grdPlayers.RowPrePaint += GrdPlayers_RowPrePaint;
+            this.lstHistory.MouseDoubleClick += LstHistory_MouseDoubleClick;
 
             rconServerProxy = new ServerProxy();
             LoadAutocompleteCommands();
@@ -110,6 +114,7 @@ namespace Squad.Admin.Console.Forms
                 if (this.rconServerProxy.Connect(this.serverConnectionInfo))
                 {
                     EnableLoginControls(true);
+                    GetServerInformation();
                     ListPlayers();
                 }
                 LoadContextMenuItems();
@@ -134,6 +139,7 @@ namespace Squad.Admin.Console.Forms
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            GetServerInformation();
             ListPlayers();
         }
 
@@ -153,17 +159,29 @@ namespace Squad.Admin.Console.Forms
             SetControlEnabledState(btnClear, false);
         }
 
+        private void btnClearConsole_Click(object sender, EventArgs e)
+        {
+            // Clear the text from the server console response
+            SetTextboxText(txtResponse, string.Empty);
+        }
+
         private void btnSettings_Click(object sender, EventArgs e)
         {
-
+            frmSettings fSettings = new frmSettings();
+            fSettings.ShowDialog(this);
+            LoadContextMenuItems();
         }
 
         // Launch the browser with the Steam profile of the selected player
         private void GrdPlayers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string sUrl = "http://steamcommunity.com/profiles/" + grdPlayers.Rows[e.RowIndex].Cells[2].Value.ToString();
-            ProcessStartInfo sInfo = new ProcessStartInfo(sUrl);
-            Process.Start(sInfo);
+            // Only act if the cell content clicked was the player name and an actual row, not a column header
+            if (e.ColumnIndex == 1 && e.RowIndex > -1)
+            {
+                string sUrl = "http://steamcommunity.com/profiles/" + grdPlayers.Rows[e.RowIndex].Cells[2].Value.ToString();
+                ProcessStartInfo sInfo = new ProcessStartInfo(sUrl);
+                Process.Start(sInfo);
+            }
         }
 
         /// <summary>
@@ -180,8 +198,9 @@ namespace Squad.Admin.Console.Forms
 
                 // pull the current player name from the clicked row
                 string playerName = grdPlayers.Rows[currentMouseOverRow].Cells[1].Value.ToString();
-                string playerId = grdPlayers.Rows[currentMouseOverRow].Cells[2].Value.ToString();
+                string playerSteamId = grdPlayers.Rows[currentMouseOverRow].Cells[2].Value.ToString();
                 string adminName = txtDisplayName.Text.Trim().Length != 0 ? txtDisplayName.Text.Trim() : "RCON Admin";
+                string slot = grdPlayers.Rows[currentMouseOverRow].Cells[0].Value.ToString();
 
                 if (currentMouseOverRow >= 0)
                 {
@@ -205,7 +224,7 @@ namespace Squad.Admin.Console.Forms
                     foreach (XElement k in menuReasons.Root.Element("KickReasons").Elements())
                     {
                         MenuItem kick = new MenuItem(k.Value.Replace("PLAYERNAME", playerName).Replace("ADMINNAME", adminName));
-                        kick.Tag = "AdminKickById " + playerId + " " + kick.Text;
+                        kick.Tag = "AdminKick " + playerSteamId + " " + kick.Text;
                         kick.Click += menu_Click;
                         ki.MenuItems.Add(kick);
                     }
@@ -217,7 +236,7 @@ namespace Squad.Admin.Console.Forms
                     foreach (XElement b in menuReasons.Root.Element("BanReasons").Elements())
                     {
                         MenuItem ban = new MenuItem(b.Value.Replace("PLAYERNAME", playerName).Replace("ADMINNAME", adminName));
-                        ban.Tag = "AdminBanById " + playerId + " " + ban.Text;
+                        ban.Tag = "AdminBan " + playerSteamId + " " + ban.Text;
                         ban.Click += menu_Click;
                         bi.MenuItems.Add(ban);
                     }
@@ -228,12 +247,33 @@ namespace Squad.Admin.Console.Forms
             }
         }
 
+        private void GrdPlayers_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (Convert.ToString(grdPlayers.Rows[e.RowIndex].Cells[4].Value).Trim() != string.Empty)
+            {
+                grdPlayers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Silver;
+            }
+        }
 
         void menu_Click(object sender, EventArgs e)
         {
             this.rconServerProxy.SendCommand(((MenuItem)sender).Tag.ToString());
             AddCommandToHistoryList(((MenuItem)sender).Tag.ToString());
         }
+
+
+        private void LstHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int index = this.lstHistory.IndexFromPoint(e.Location);
+                if (index != System.Windows.Forms.ListBox.NoMatches)
+                {
+                    SetTextboxText(txtCommand, lstHistory.Items[index].ToString());
+                }
+            }
+        }
+
 
         #endregion
 
@@ -291,6 +331,23 @@ namespace Squad.Admin.Console.Forms
 
         #region Command and response handlers
 
+        /// <summary>
+        /// Retrieve server information and display it
+        /// </summary>
+        private void GetServerInformation()
+        {
+            ServerInfo info = this.rconServerProxy.GetServerData();
+
+            if (info != null)
+            {
+                lblConnectedTo.Text = info.Name;
+                lblMapName.Text = info.Map;
+                lblPlayerCount.Text = info.Players + "/" + info.MaxPlayers;
+            }
+
+        }
+
+
         public void ListPlayers()
         {
 
@@ -301,7 +358,7 @@ namespace Squad.Admin.Console.Forms
 
             try
             {
-                string playerList = this.rconServerProxy.SendCommand("ListPlayers");
+                string playerList = this.rconServerProxy.GetPlayerList();
 
                 // Remove all rows from the grid
                 ClearGridRows(grdPlayers);
@@ -324,7 +381,7 @@ namespace Squad.Admin.Console.Forms
                                 disconnectedPlayers = false;
                                 isPlayer = false;
                                 break;
-                            case "----- Recently Disconnected Players [Max of 15] ----":
+                            case "----- Recently Disconnected Players [Max of 15] -----":
                                 activePlayers = false;
                                 disconnectedPlayers = true;
                                 isPlayer = false;
@@ -333,6 +390,7 @@ namespace Squad.Admin.Console.Forms
                                 isPlayer = true;
                                 break;
                         }
+
 
                         // Process connected player list
                         if (activePlayers)
@@ -371,6 +429,7 @@ namespace Squad.Admin.Console.Forms
             catch(Exception ex)
             { }
 
+
         }
 
         #endregion
@@ -399,7 +458,14 @@ namespace Squad.Admin.Console.Forms
             }
             else
             {
-                lstHistory.Items.Insert(0, commandText);
+                // prevent duplication of the same command from being added to the list
+                bool isDup = false;
+                for (int i = 0; i < lstHistory.Items.Count; i++)
+                {
+                    isDup = lstHistory.Items[i].ToString() == commandText;
+                    if (isDup) break;
+                }
+                if (!isDup) lstHistory.Items.Insert(0, commandText);
             }
         }
 
@@ -412,7 +478,21 @@ namespace Squad.Admin.Console.Forms
             }
             else
             {
-                control.Text += response + Environment.NewLine;
+                if (control.Text.Length > 0) control.Text += Environment.NewLine + Environment.NewLine;
+                control.Text += response;
+            }
+        }
+
+        private void SetTextboxText(TextBox control, string text)
+        {
+            if (control.InvokeRequired)
+            {
+                AddTextToTextbox c = new AddTextToTextbox(SetTextboxText);
+                this.Invoke(c, new object[] { control, text });
+            }
+            else
+            {
+                control.Text = text;
             }
         }
 
@@ -469,6 +549,7 @@ namespace Squad.Admin.Console.Forms
             }
         }
         #endregion
+
 
     }
 }

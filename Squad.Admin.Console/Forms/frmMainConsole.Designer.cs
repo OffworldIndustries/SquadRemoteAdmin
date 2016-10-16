@@ -41,6 +41,7 @@
             this.lblFindPlayer = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grpConsole = new System.Windows.Forms.GroupBox();
+            this.btnClearConsole = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +62,11 @@
             this.txtRconPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblConnectedTo = new System.Windows.Forms.Label();
+            this.lblMapLabel = new System.Windows.Forms.Label();
+            this.lblMapName = new System.Windows.Forms.Label();
+            this.lblPlayerCountLabel = new System.Windows.Forms.Label();
+            this.lblPlayerCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpPlayerList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPlayers)).BeginInit();
@@ -89,7 +95,7 @@
             this.grpPlayerList.Enabled = false;
             this.grpPlayerList.Location = new System.Drawing.Point(12, 114);
             this.grpPlayerList.Name = "grpPlayerList";
-            this.grpPlayerList.Size = new System.Drawing.Size(639, 586);
+            this.grpPlayerList.Size = new System.Drawing.Size(639, 673);
             this.grpPlayerList.TabIndex = 0;
             this.grpPlayerList.TabStop = false;
             this.grpPlayerList.Text = "Player List";
@@ -98,6 +104,8 @@
             // 
             this.grdPlayers.AllowUserToAddRows = false;
             this.grdPlayers.AllowUserToDeleteRows = false;
+            this.grdPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.grdPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cSlot,
@@ -108,7 +116,7 @@
             this.grdPlayers.Location = new System.Drawing.Point(9, 46);
             this.grdPlayers.Name = "grdPlayers";
             this.grdPlayers.ReadOnly = true;
-            this.grdPlayers.Size = new System.Drawing.Size(624, 492);
+            this.grdPlayers.Size = new System.Drawing.Size(624, 579);
             this.grdPlayers.TabIndex = 11;
             // 
             // cSlot
@@ -123,6 +131,7 @@
             this.cPlayer.HeaderText = "Player";
             this.cPlayer.Name = "cPlayer";
             this.cPlayer.ReadOnly = true;
+            this.cPlayer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.cPlayer.Width = 160;
             // 
             // cSteam64Id
@@ -150,6 +159,7 @@
             this.txtPlayerName.Name = "txtPlayerName";
             this.txtPlayerName.Size = new System.Drawing.Size(239, 20);
             this.txtPlayerName.TabIndex = 2;
+            this.txtPlayerName.Visible = false;
             // 
             // lblFindPlayer
             // 
@@ -159,10 +169,12 @@
             this.lblFindPlayer.Size = new System.Drawing.Size(59, 13);
             this.lblFindPlayer.TabIndex = 1;
             this.lblFindPlayer.Text = "Find Player";
+            this.lblFindPlayer.Visible = false;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(474, 544);
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefresh.Location = new System.Drawing.Point(482, 631);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(151, 36);
             this.btnRefresh.TabIndex = 6;
@@ -172,8 +184,10 @@
             // 
             // grpConsole
             // 
-            this.grpConsole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grpConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpConsole.Controls.Add(this.btnClearConsole);
             this.grpConsole.Controls.Add(this.label2);
             this.grpConsole.Controls.Add(this.lstHistory);
             this.grpConsole.Controls.Add(this.label1);
@@ -184,10 +198,21 @@
             this.grpConsole.Enabled = false;
             this.grpConsole.Location = new System.Drawing.Point(657, 114);
             this.grpConsole.Name = "grpConsole";
-            this.grpConsole.Size = new System.Drawing.Size(481, 586);
+            this.grpConsole.Size = new System.Drawing.Size(481, 673);
             this.grpConsole.TabIndex = 0;
             this.grpConsole.TabStop = false;
             this.grpConsole.Text = "Console Command";
+            // 
+            // btnClearConsole
+            // 
+            this.btnClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearConsole.Location = new System.Drawing.Point(366, 631);
+            this.btnClearConsole.Name = "btnClearConsole";
+            this.btnClearConsole.Size = new System.Drawing.Size(109, 36);
+            this.btnClearConsole.TabIndex = 8;
+            this.btnClearConsole.Text = "Clear Console";
+            this.btnClearConsole.UseVisualStyleBackColor = true;
+            this.btnClearConsole.Click += new System.EventHandler(this.btnClearConsole_Click);
             // 
             // label2
             // 
@@ -200,6 +225,8 @@
             // 
             // lstHistory
             // 
+            this.lstHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstHistory.FormattingEnabled = true;
             this.lstHistory.Location = new System.Drawing.Point(6, 108);
             this.lstHistory.Name = "lstHistory";
@@ -217,6 +244,7 @@
             // 
             // btnClear
             // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Location = new System.Drawing.Point(366, 261);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(109, 36);
@@ -227,6 +255,7 @@
             // 
             // btnSend
             // 
+            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.Location = new System.Drawing.Point(366, 46);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(109, 36);
@@ -237,15 +266,23 @@
             // 
             // txtResponse
             // 
+            this.txtResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtResponse.BackColor = System.Drawing.Color.Black;
+            this.txtResponse.ForeColor = System.Drawing.Color.Lime;
             this.txtResponse.Location = new System.Drawing.Point(6, 324);
             this.txtResponse.Multiline = true;
             this.txtResponse.Name = "txtResponse";
+            this.txtResponse.ReadOnly = true;
             this.txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResponse.Size = new System.Drawing.Size(469, 214);
+            this.txtResponse.Size = new System.Drawing.Size(469, 301);
             this.txtResponse.TabIndex = 7;
             // 
             // txtCommand
             // 
+            this.txtCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCommand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtCommand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtCommand.Location = new System.Drawing.Point(6, 20);
@@ -383,11 +420,59 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "Server IP:";
             // 
+            // lblConnectedTo
+            // 
+            this.lblConnectedTo.AutoSize = true;
+            this.lblConnectedTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnectedTo.Location = new System.Drawing.Point(663, 12);
+            this.lblConnectedTo.Name = "lblConnectedTo";
+            this.lblConnectedTo.Size = new System.Drawing.Size(0, 17);
+            this.lblConnectedTo.TabIndex = 12;
+            // 
+            // lblMapLabel
+            // 
+            this.lblMapLabel.AutoSize = true;
+            this.lblMapLabel.Location = new System.Drawing.Point(663, 41);
+            this.lblMapLabel.Name = "lblMapLabel";
+            this.lblMapLabel.Size = new System.Drawing.Size(68, 13);
+            this.lblMapLabel.TabIndex = 13;
+            this.lblMapLabel.Text = "Current Map:";
+            // 
+            // lblMapName
+            // 
+            this.lblMapName.AutoSize = true;
+            this.lblMapName.Location = new System.Drawing.Point(737, 41);
+            this.lblMapName.Name = "lblMapName";
+            this.lblMapName.Size = new System.Drawing.Size(0, 13);
+            this.lblMapName.TabIndex = 14;
+            // 
+            // lblPlayerCountLabel
+            // 
+            this.lblPlayerCountLabel.AutoSize = true;
+            this.lblPlayerCountLabel.Location = new System.Drawing.Point(663, 61);
+            this.lblPlayerCountLabel.Name = "lblPlayerCountLabel";
+            this.lblPlayerCountLabel.Size = new System.Drawing.Size(70, 13);
+            this.lblPlayerCountLabel.TabIndex = 15;
+            this.lblPlayerCountLabel.Text = "Player Count:";
+            // 
+            // lblPlayerCount
+            // 
+            this.lblPlayerCount.AutoSize = true;
+            this.lblPlayerCount.Location = new System.Drawing.Point(739, 61);
+            this.lblPlayerCount.Name = "lblPlayerCount";
+            this.lblPlayerCount.Size = new System.Drawing.Size(0, 13);
+            this.lblPlayerCount.TabIndex = 16;
+            // 
             // frmMainConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 712);
+            this.ClientSize = new System.Drawing.Size(1150, 799);
+            this.Controls.Add(this.lblPlayerCount);
+            this.Controls.Add(this.lblPlayerCountLabel);
+            this.Controls.Add(this.lblMapName);
+            this.Controls.Add(this.lblMapLabel);
+            this.Controls.Add(this.lblConnectedTo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.grpConsole);
@@ -405,6 +490,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -442,5 +528,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cSteam64Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDisconnect;
+        private System.Windows.Forms.Button btnClearConsole;
+        private System.Windows.Forms.Label lblConnectedTo;
+        private System.Windows.Forms.Label lblMapLabel;
+        private System.Windows.Forms.Label lblMapName;
+        private System.Windows.Forms.Label lblPlayerCountLabel;
+        private System.Windows.Forms.Label lblPlayerCount;
     }
 }

@@ -183,6 +183,7 @@
     <Compile Include="Utils\SteamId.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="QueryMaster.license">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

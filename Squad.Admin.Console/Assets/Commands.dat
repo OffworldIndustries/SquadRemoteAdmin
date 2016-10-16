@@ -1,0 +1,28 @@
+﻿AdminBan "<NameOrSteamId>" "<BanLength>" <BanReason>
+AdminBanById <PlayerId> "<BanLength>" <BanReason>
+AdminBroadcast <Message>
+AdminChangeMap <MapName>
+AdminEndMatch
+AdminKick "<NameOrSteamId>" <KickReason>
+AdminKickById <PlayerId> <KickReason>
+AdminKillServer <Force [0|1]>
+AdminListDisconnectedPlayers
+AdminPauseMatch
+AdminProfileServer <SecondsToProfileFor> <bUseRaw [0|1]>
+AdminRestartMatch
+AdminSetNextMap <MapName>
+AdminSetMaxNumPlayers <NumPlayers>
+AdminSetNumReservedSlots <NumReserved>
+AdminSetServerPassword <Password>
+AdminSlomo <TimeDilation>
+AdminStats
+AdminUnpauseMatch
+ChatToAdmin <Message>
+DebugRevive
+DebugStopBleeding
+DebugSetServerTickRate <FPS>
+ListCommands <ShowDetails [0|1]>
+ListPermittedCommands <ShowDetails [0|1]>
+ListPlayers
+ShowCommandInfo <CommandName>
+ShowNextMap

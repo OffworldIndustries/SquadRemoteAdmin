@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MenuReasons>
+  <WarnReasons>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Stop Teamkilling!</WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: You must follow orders </WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Return the vehicle to main</WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Spamming-trolling-griefing</WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Please watch your language!</WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Squad may not be locked. Please unlock your squad.</WarnReason>
+    <WarnReason>ADMINNAME is WARNING!!! PLAYERNAME: Reason Not Given</WarnReason>
+  </WarnReasons>
+  <KickReasons>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME for Teamkilling!</KickReason>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME: You must follow orders.</KickReason>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME: Spamming-trolling-griefing</KickReason>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME: Please watch your language!</KickReason>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME: Violation of asset claiming rules.</KickReason>
+    <KickReason>ADMINNAME is KICKING!!! PLAYERNAME: Reason Not Given</KickReason>
+  </KickReasons>
+  <BanReasons>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME for Teamkilling!</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME: Spamming-trolling-griefing</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME: You must follow orders.</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME: Violation of asset claiming rules.</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME: Please watch your language!</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME for cheating/hacking!</BanReason>
+    <BanReason>ADMINNAME is BANNING!!! PLAYERNAME: Reason Not Given</BanReason>
+  </BanReasons>
+</MenuReasons>
