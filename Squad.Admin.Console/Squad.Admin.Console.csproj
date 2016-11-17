@@ -140,7 +140,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Assets\Commands.dat" />
+    <None Include="Assets\Commands.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -170,7 +172,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\MenuReasons.xml" />
+    <None Include="Assets\MenuReasons.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Assets\settings.png" />
     <Content Include="Assets\Squad.ico" />
     <Content Include="Assets\SquadLoginBanner.png" />

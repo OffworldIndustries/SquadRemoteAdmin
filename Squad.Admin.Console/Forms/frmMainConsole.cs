@@ -298,7 +298,7 @@ namespace Squad.Admin.Console.Forms
         /// </summary>
         private void LoadAutocompleteCommands()
         {
-            string commandFilePath = AppDomain.CurrentDomain.BaseDirectory + "Commands.dat";
+            string commandFilePath = AppDomain.CurrentDomain.BaseDirectory + "Assets\\Commands.dat";
             List<string> commands;
             AutoCompleteStringCollection commandList = new AutoCompleteStringCollection();
 
@@ -325,7 +325,7 @@ namespace Squad.Admin.Console.Forms
         /// </summary>
         private void LoadContextMenuItems()
         {
-            string reasonsFilePath = AppDomain.CurrentDomain.BaseDirectory + "MenuReasons.xml";
+            string reasonsFilePath = AppDomain.CurrentDomain.BaseDirectory + "Assets\\MenuReasons.xml";
             // Load the xml file with the menu reasons
             try
             {
