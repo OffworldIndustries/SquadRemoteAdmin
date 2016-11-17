@@ -298,11 +298,21 @@ namespace Squad.Admin.Console.Forms
         /// </summary>
         private void LoadAutocompleteCommands()
         {
+            string commandFilePath = AppDomain.CurrentDomain.BaseDirectory + "Commands.dat";
+            List<string> commands;
             AutoCompleteStringCollection commandList = new AutoCompleteStringCollection();
 
-            string[] commands = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Commands.dat");
+            try
+            {
+                commands = new List<string>(File.ReadAllLines(commandFilePath));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred trying to open the Commands file!\r\nError: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
 
-            for (int i = 0; i < commands.Length; i++)
+            for (int i = 0; i < commands.Count; i++)
             {
                 commandList.Add(commands[i].Trim());
             }
@@ -315,10 +325,11 @@ namespace Squad.Admin.Console.Forms
         /// </summary>
         private void LoadContextMenuItems()
         {
+            string reasonsFilePath = AppDomain.CurrentDomain.BaseDirectory + "MenuReasons.xml";
             // Load the xml file with the menu reasons
             try
             {
-                menuReasons = XDocument.Load(@"MenuReasons.xml");
+                menuReasons = XDocument.Load(reasonsFilePath);
             }
             catch(Exception ex)
             {
