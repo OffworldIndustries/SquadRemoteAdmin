@@ -145,7 +145,7 @@ namespace Squad.Admin.Console.Forms
                 }
 
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
         }
 

@@ -28,13 +28,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
-using Ionic.BZip2;
-using System.Net;
 using Ionic.Crc;
 using System.Net.Sockets;
-using QueryMaster;
+using Ionic.BZip2;
 
 namespace QueryMaster.GameServer
 {
@@ -127,8 +124,8 @@ namespace QueryMaster.GameServer
             var pktCount = data[8] & 0x0F;
 
             List<KeyValuePair<int, byte[]>> pktList = new List<KeyValuePair<int, byte[]>>(pktCount);
-            pktList.Add(new KeyValuePair<int, byte[]>(data[8] >> 4, data));     
-       
+            pktList.Add(new KeyValuePair<int, byte[]>(data[8] >> 4, data));
+
             for (int i = 1; i < pktCount; i++)
             {
                 recvData = new byte[BufferSize];
@@ -149,7 +146,7 @@ namespace QueryMaster.GameServer
         }
 
         private byte[] SourcePackets(byte[] data)
-        {           
+        {
             bool isCompressed = false;
             int checksum = 0;
             byte[] recvData = null;
@@ -186,7 +183,7 @@ namespace QueryMaster.GameServer
             for (int i = 1; i < pktList.Count; i++)
             {
                 parser = new Parser(pktList[i].Value);
-                parser.SkipBytes(12);//multipacket header 
+                parser.SkipBytes(12);//multipacket header
                 recvList.AddRange(parser.GetUnParsedBytes());
             }
 
