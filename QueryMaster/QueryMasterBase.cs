@@ -74,7 +74,7 @@ namespace QueryMaster
                     T reply = method();
                     return reply;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (AttemptCounter >= attempts)
                         if (throwExceptions)

@@ -1,22 +1,22 @@
 ﻿#region License
-/* 
+/*
  * Copyright (C) 2013 Myrcon Pty. Ltd. / Geoff "Phogue" Green
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to 
+ * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
  * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
+ *
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
 */
@@ -72,7 +72,7 @@ namespace Squad.Admin.Console.Forms
 
             rconServerProxy = new ServerProxy();
             LoadAutocompleteCommands();
-            
+
         }
 
         #region control validation events
@@ -217,7 +217,7 @@ namespace Squad.Admin.Console.Forms
                         wi.MenuItems.Add(warn);
                     }
                     m.MenuItems.Add(wi);
-                    
+
                     // Kicks
                     MenuItem ki = new MenuItem("Kick");
 
@@ -300,7 +300,13 @@ namespace Squad.Admin.Console.Forms
         {
             AutoCompleteStringCollection commandList = new AutoCompleteStringCollection();
 
-            string[] commands = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Commands.dat");
+            string commandsPath = AppDomain.CurrentDomain.BaseDirectory + "Commands.dat";
+            if (!File.Exists(commandsPath))
+            {
+                commandsPath = AppDomain.CurrentDomain.BaseDirectory + @"..\..\Assets\Commands.dat";
+            }
+
+            string[] commands = File.ReadAllLines(commandsPath);
 
             for (int i = 0; i < commands.Length; i++)
             {
@@ -311,7 +317,7 @@ namespace Squad.Admin.Console.Forms
         }
 
         /// <summary>
-        /// Load context menu options from the menu xml file into 
+        /// Load context menu options from the menu xml file into
         /// </summary>
         private void LoadContextMenuItems()
         {
@@ -324,7 +330,7 @@ namespace Squad.Admin.Console.Forms
             {
                 MessageBox.Show("Error occurred trying to open the menu options!\r\nError: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            
+
         }
 
         #endregion
@@ -426,7 +432,7 @@ namespace Squad.Admin.Console.Forms
                 }
 
             }
-            catch(Exception ex)
+            catch(Exception)
             { }
 
 
