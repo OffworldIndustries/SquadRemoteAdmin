@@ -64,6 +64,7 @@ namespace Squad.Admin.Console.Forms
             // Bind control event handlers
             this.txtServerIP.Validating += TxtServerIP_Validating;
             this.txtServerPort.Validating += TxtServerPort_Validating;
+            this.txtQueryPort.Validating += TxtQueryPort_Validating;
             this.txtRconPassword.Validating += TxtRconPassword_Validating;
             this.grdPlayers.CellContentClick += GrdPlayers_CellContentClick;
             this.grdPlayers.MouseClick += GrdPlayers_MouseClick;
@@ -88,6 +89,13 @@ namespace Squad.Admin.Console.Forms
         {
             MaskedTextBox tb = (MaskedTextBox)sender;
             this.serverConnectionInfo.ServerPort = Convert.ToInt32(tb.Text.Trim());
+            btnConnect.Enabled = this.serverConnectionInfo.IsValid();
+        }
+
+        private void TxtQueryPort_Validating(object sender, CancelEventArgs e)
+        {
+            MaskedTextBox tb = (MaskedTextBox)sender;
+            this.serverConnectionInfo.ServerQueryPort = Convert.ToInt32(tb.Text.Trim());
             btnConnect.Enabled = this.serverConnectionInfo.IsValid();
         }
 
@@ -285,6 +293,7 @@ namespace Squad.Admin.Console.Forms
             SetControlEnabledState(btnConnect, !enable);
             SetControlEnabledState(txtServerIP, !enable);
             SetControlEnabledState(txtServerPort, !enable);
+            SetControlEnabledState(txtQueryPort, !enable);
             SetControlEnabledState(txtRconPassword, !enable);
             SetControlEnabledState(txtDisplayName, !enable);
             SetControlEnabledState(chkShowPassword, !enable);
