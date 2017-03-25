@@ -67,8 +67,6 @@
             this.lblMapName = new System.Windows.Forms.Label();
             this.lblPlayerCountLabel = new System.Windows.Forms.Label();
             this.lblPlayerCount = new System.Windows.Forms.Label();
-            this.txtQueryPort = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpPlayerList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPlayers)).BeginInit();
@@ -115,10 +113,10 @@
             this.cSteam64Id,
             this.cStatus,
             this.cDisconnect});
-            this.grdPlayers.Location = new System.Drawing.Point(9, 45);
+            this.grdPlayers.Location = new System.Drawing.Point(9, 46);
             this.grdPlayers.Name = "grdPlayers";
             this.grdPlayers.ReadOnly = true;
-            this.grdPlayers.Size = new System.Drawing.Size(624, 592);
+            this.grdPlayers.Size = new System.Drawing.Size(624, 579);
             this.grdPlayers.TabIndex = 11;
             // 
             // cSlot
@@ -157,7 +155,7 @@
             // 
             // txtPlayerName
             // 
-            this.txtPlayerName.Location = new System.Drawing.Point(71, 19);
+            this.txtPlayerName.Location = new System.Drawing.Point(71, 20);
             this.txtPlayerName.Name = "txtPlayerName";
             this.txtPlayerName.Size = new System.Drawing.Size(239, 20);
             this.txtPlayerName.TabIndex = 2;
@@ -166,7 +164,7 @@
             // lblFindPlayer
             // 
             this.lblFindPlayer.AutoSize = true;
-            this.lblFindPlayer.Location = new System.Drawing.Point(6, 22);
+            this.lblFindPlayer.Location = new System.Drawing.Point(6, 23);
             this.lblFindPlayer.Name = "lblFindPlayer";
             this.lblFindPlayer.Size = new System.Drawing.Size(59, 13);
             this.lblFindPlayer.TabIndex = 1;
@@ -176,9 +174,9 @@
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.Location = new System.Drawing.Point(511, 643);
+            this.btnRefresh.Location = new System.Drawing.Point(482, 631);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(122, 24);
+            this.btnRefresh.Size = new System.Drawing.Size(151, 36);
             this.btnRefresh.TabIndex = 6;
             this.btnRefresh.Text = "Refresh Player List";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -306,10 +304,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label3);            
             this.panel1.Controls.Add(this.txtServerIP);
             this.panel1.Controls.Add(this.txtServerPort);
-            this.panel1.Controls.Add(this.txtQueryPort);
             this.panel1.Controls.Add(this.chkShowPassword);
             this.panel1.Controls.Add(this.btnDisconnect);
             this.panel1.Controls.Add(this.btnConnect);
@@ -322,36 +318,28 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(639, 95);
+            this.panel1.Size = new System.Drawing.Size(639, 96);
             this.panel1.TabIndex = 0;
             // 
             // txtServerIP
             // 
-            this.txtServerIP.Location = new System.Drawing.Point(256, 10);
+            this.txtServerIP.Location = new System.Drawing.Point(278, 10);
             this.txtServerIP.Name = "txtServerIP";
             this.txtServerIP.Size = new System.Drawing.Size(102, 20);
             this.txtServerIP.TabIndex = 2;
             // 
             // txtServerPort
             // 
-            this.txtServerPort.Location = new System.Drawing.Point(433, 10);
+            this.txtServerPort.Location = new System.Drawing.Point(424, 10);
             this.txtServerPort.Mask = "#####";
             this.txtServerPort.Name = "txtServerPort";
-            this.txtServerPort.Size = new System.Drawing.Size(42, 20);
+            this.txtServerPort.Size = new System.Drawing.Size(49, 20);
             this.txtServerPort.TabIndex = 4;
-            // 
-            // txtQueryPort
-            // 
-            this.txtQueryPort.Location = new System.Drawing.Point(559, 10);
-            this.txtQueryPort.Mask = "#####";
-            this.txtQueryPort.Name = "txtQueryPort";
-            this.txtQueryPort.Size = new System.Drawing.Size(42, 20);
-            this.txtQueryPort.TabIndex = 5;
             // 
             // chkShowPassword
             // 
             this.chkShowPassword.AutoSize = true;
-            this.chkShowPassword.Location = new System.Drawing.Point(364, 36);
+            this.chkShowPassword.Location = new System.Drawing.Point(394, 36);
             this.chkShowPassword.Name = "chkShowPassword";
             this.chkShowPassword.Size = new System.Drawing.Size(102, 17);
             this.chkShowPassword.TabIndex = 9;
@@ -362,9 +350,9 @@
             // btnDisconnect
             // 
             this.btnDisconnect.Enabled = false;
-            this.btnDisconnect.Location = new System.Drawing.Point(548, 57);
+            this.btnDisconnect.Location = new System.Drawing.Point(515, 48);
             this.btnDisconnect.Name = "btnDisconnect";
-            this.btnDisconnect.Size = new System.Drawing.Size(84, 24);
+            this.btnDisconnect.Size = new System.Drawing.Size(109, 36);
             this.btnDisconnect.TabIndex = 10;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
@@ -373,9 +361,9 @@
             // btnConnect
             // 
             this.btnConnect.Enabled = false;
-            this.btnConnect.Location = new System.Drawing.Point(458, 57);
+            this.btnConnect.Location = new System.Drawing.Point(515, 6);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(84, 24);
+            this.btnConnect.Size = new System.Drawing.Size(109, 36);
             this.btnConnect.TabIndex = 9;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -383,7 +371,7 @@
             // 
             // txtDisplayName
             // 
-            this.txtDisplayName.Location = new System.Drawing.Point(256, 60);
+            this.txtDisplayName.Location = new System.Drawing.Point(278, 60);
             this.txtDisplayName.Name = "txtDisplayName";
             this.txtDisplayName.Size = new System.Drawing.Size(162, 20);
             this.txtDisplayName.TabIndex = 8;
@@ -408,7 +396,7 @@
             // 
             // txtRconPassword
             // 
-            this.txtRconPassword.Location = new System.Drawing.Point(256, 34);
+            this.txtRconPassword.Location = new System.Drawing.Point(278, 34);
             this.txtRconPassword.Name = "txtRconPassword";
             this.txtRconPassword.Size = new System.Drawing.Size(102, 20);
             this.txtRconPassword.TabIndex = 6;
@@ -417,11 +405,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(364, 13);
+            this.label4.Location = new System.Drawing.Point(389, 13);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
+            this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "RCON Port:";
+            this.label4.Text = "Port:";
             // 
             // label5
             // 
@@ -474,15 +462,6 @@
             this.lblPlayerCount.Name = "lblPlayerCount";
             this.lblPlayerCount.Size = new System.Drawing.Size(0, 13);
             this.lblPlayerCount.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(493, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Query Port:";
             // 
             // frmMainConsole
             // 
@@ -555,7 +534,5 @@
         private System.Windows.Forms.Label lblMapName;
         private System.Windows.Forms.Label lblPlayerCountLabel;
         private System.Windows.Forms.Label lblPlayerCount;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MaskedTextBox txtQueryPort;
     }
 }
